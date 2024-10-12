@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs')
+require("dotenv").config();
 
 app.get('/',function(req,res){
     res.render('home')
@@ -12,9 +13,11 @@ app.get('/',function(req,res){
 app.get('/about',function(req,res){
     res.status(200).json({message:"About Page"})
 })
+app.post('/user/store',function(req,res){
+    res.status(200).json({message:"Data Submitted"} )
+})
 
-
-app.listen(8080,function(){
-    console.log("server started running on port 8080 ")
+app.listen(process.env.PORT,function(){
+    console.log(`server started running on port ${process.env.PORT}! `)
     
 })
