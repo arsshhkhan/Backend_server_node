@@ -1,21 +1,26 @@
+const userServices = require("../services/userServices")
+
 class userController{
     static list(req,res){
-        res.status(200).json({message:"user list"})
+   userServices.list(req,res);
     }
     static create(req,res){
+        userServices.list(req,res);
     
-        res.status(200).json({message:"user create"})
+        
     }
     static update(req,res){
+        userServices.update(req,res);
         
-        res.status(200).json({message:"user Update"})
+    
     }
     static delete(req,res){
+        userServices.delete(req,res);
         
-        res.status(200).json({message:"user delete"})
+    
     }
     static detail(req,res){
-        res.status(200).json({message:"user detail"})
+        userServices.detail(req,res);
     
     }
     

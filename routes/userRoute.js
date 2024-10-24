@@ -5,8 +5,9 @@ const userRouter =express.Router();
 
 userRouter.get('',userController.list);
 userRouter.post('',userController.create);
-userRouter.put(':/id',userController.update);
-userRouter.delete(':/id',userController.delete);
-userRouter.get(':/id',userController.detail);
+userRouter.put('/:id', userController.update);
+
+userRouter.delete('/:id',userController.delete);
+userRouter.get('/:id',userController.detail);
 
 module.exports= userRouter;
