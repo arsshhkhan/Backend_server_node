@@ -5,7 +5,7 @@ class userController{
    userServices.list(req,res);
     }
     static create(req,res){
-        userServices.list(req,res);
+        userServices.create(req,res);
     
         
     }
