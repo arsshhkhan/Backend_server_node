@@ -21,6 +21,16 @@ class userService{
         }
     }
     async update(req,res){
+        try{
+            const id = req.params.id;
+            const data = (({name,email,password})=>({name,email,password}))(req.body);
+           await User.findByIdAndUpdate(id,data);
+           res.status(201).json({message:"User Updated successfully"})
+        }
+        catch(e){
+            res.status(400).json({message:e})
+
+        }
         
     }
 
