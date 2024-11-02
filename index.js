@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const userRouter = require('./routes/userRoute');
 const dbconnect = require('./config/dbconnect');
+const Authentication = require('./middlewares/Authentication');
+const authRouter = require('./routes/authRoute');
 
 app.set('view engine', 'ejs')
 require("dotenv").config();
@@ -15,7 +17,8 @@ app.use(bodyParser.json());
 app.get('/',function(req,res){
     res.render('home')
 })
-app.use('/api/v1/user',userRouter)
+app.use('/api/v1/user',Authentication.verifyToken,userRouter)
+app.use('./api/v1/auth',authRouter)
 
 app.listen(process.env.PORT,function(){
     console.log(`server started running on port ${process.env.PORT}! `)
