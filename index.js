@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 app.get('/',function(req,res){
     res.render('home')
 })
-app.use('/api/v1/user',Authentication.verifyToken,userRouter)
-app.use('./api/v1/auth',authRouter)
+app.use('/api/v1/user',userRouter)
 
 app.listen(process.env.PORT,function(){
     console.log(`server started running on port ${process.env.PORT}! `)

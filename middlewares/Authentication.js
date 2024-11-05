@@ -2,17 +2,17 @@ const jwt =require('jsonwebtoken');
 const User = require('../models/User');
 require("dotenv").config();
 
-const key = process.env.key.KEY;
+const key = process.env.KEY;
 class Authentication{
 
     verifyToken(req,res,next){
         const authHeader = req.headers['authorization'];
         if (!authHeader) return res.status(403).json({message:"No Token Provideed"});
 
-        const token = authHeader.split('')[1];
+        const token = authHeader.split(' ')[1];
         if(!token) return res.status(403).json({message:"No token provided"});
 
-        jwt.verify(token.key, (err,decoded)=>{
+        jwt.verify(token,key, (err,decoded)=>{
             if (err){
                 return res.status(401).json({message:'Failed to authentication token'});
             }
@@ -24,7 +24,7 @@ class Authentication{
 async login(req,res){
     try{
         const credentials =(({email,password})=>({email,password}))(req.body);
-        const user = await User.find(credentials);
+        const user = await User.findOne(credentials);
         if(!user){
             res.status(400).json({message:"Usernot found!"})
         }
