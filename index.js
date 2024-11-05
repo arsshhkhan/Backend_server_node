@@ -10,14 +10,13 @@ app.set('view engine', 'ejs')
 require("dotenv").config();
 dbconnect()
 
-
-
 app.use(bodyParser.urlencoded({ extended:false}))
 app.use(bodyParser.json());
 app.get('/',function(req,res){
     res.render('home')
 })
-app.use('/api/v1/user',userRouter)
+app.use('/api/v1/user',Authentication.verifyToken,userRouter)
+app.use('/api/v1/auth',authRouter);
 
 app.listen(process.env.PORT,function(){
     console.log(`server started running on port ${process.env.PORT}! `)

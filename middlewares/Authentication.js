@@ -1,5 +1,6 @@
 const jwt =require('jsonwebtoken');
 const User = require('../models/User');
+const userServices = require('../services/userServices');
 require("dotenv").config();
 
 const key = process.env.KEY;
@@ -34,6 +35,10 @@ async login(req,res){
     catch(err){
         res.status(400).json({message:err.message})
     }
+}
+
+async register(req,res){
+    userServices.create(req,res);
 }
 
 
