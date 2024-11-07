@@ -1,9 +1,10 @@
 const express =require('express');
 const Authentication =require('../middlewares/Authentication');
+const userReq = require('../requests/userReq');
 
 const authRouter =express.Router();
 
 authRouter.post('/login',Authentication.login)
-authRouter.post('/register',Authentication.register)
+authRouter.post('/register',userReq.validationRules(),userReq.validate,Authentication.register)
 
 module.exports=authRouter;
