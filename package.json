@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/arsshhkhan/Backend_server_node#readme",
   "dependencies": {
+    "@faker-js/faker": "^9.2.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

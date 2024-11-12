@@ -4,6 +4,7 @@ const userServices = require('../services/userServices');
 require("dotenv").config();
 
 const key = process.env.KEY;
+let blacklist=[];
 class Authentication{
 
     verifyToken(req,res,next){
@@ -12,6 +13,10 @@ class Authentication{
 
         const token = authHeader.split(' ')[1];
         if(!token) return res.status(403).json({message:"No token provided"});
+
+        if(blacklist.includes(token)){
+            return res.status(401).json({ message: 'Token revoked.please login again'})
+        }
 
         jwt.verify(token,key, (err,decoded)=>{
             if (err){
@@ -39,6 +44,17 @@ async login(req,res){
 
 async register(req,res){
     userServices.create(req,res);
+}
+
+logout(req,res){
+    const authHeader = req.headers['authorization'];
+    if(!authHeader) return res.status(403)({message:'No token provided.'});
+
+    const token =authHeader.split(' ')[1];
+    if(!token) return res.status(403).json({message: 'No token provided'});
+
+    blacklist.push(token);
+    res.status(200).json({message: 'Logout successfully'});
 }
 
 
